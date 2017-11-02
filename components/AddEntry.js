@@ -10,6 +10,7 @@ import { submitEntry, removeEntry } from '../utils/api';
 import { connect } from 'react-redux';
 import { addEntry } from '../actions';
 import { white, purple } from '../utils/colors';
+import moment from 'moment';
 
 function SubmitButton ({ onPress }) {
   return (
@@ -115,7 +116,7 @@ class AddEntry extends Component {
 
     return (
       <View style={styles.container}>
-        <DateHeader date={(new Date()).toLocaleDateString()}/>
+        <DateHeader date={moment(new Date().toString()).format('MMMM Do, YYYY')}/>
         {Object.keys(metaInfo).map((key) => {
           const { getIcon, type, ...rest } = metaInfo[key]
           const value = this.state[key]
