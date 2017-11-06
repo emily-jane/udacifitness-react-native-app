@@ -11,6 +11,8 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'react-native';
 import { Constants } from 'expo';
 import EntryDetail from './components/EntryDetail';
+import Live from './components/Live';
+import { setLocalNotification } from './utils/helpers';
 
 function UdaciStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -35,6 +37,13 @@ const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
     },
   },
+  Live: {
+    screen: Live,
+    navigationOptions: {
+      tabBarLabel: 'Live',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-speedometer' size={30} color={tintColor} />
+    }
+  }
 }, {
   navigationOptions: {
     header: null
@@ -71,6 +80,10 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>
